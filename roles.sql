@@ -1,0 +1,36 @@
+-- Part 5.2
+CREATE ROLE commish LOGIN PASSWORD 'commish@password';
+CREATE ROLE manager LOGIN PASSWORD 'managerpassword';
+
+-- Manager_Info
+--- Commish
+GRANT USAGE ON SCHEMA manager_info TO commish;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA manager_info TO commish;
+ALTER DEFAULT PRIVILEGES IN SCHEMA manager_info
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO commish;
+
+--- Manager
+GRANT USAGE ON SCHEMA manager_info TO manager;
+GRANT SELECT ON ALL TABLES IN SCHEMA manager_info TO manager;
+ALTER DEFAULT PRIVILEGES IN SCHEMA manager_info
+    GRANT SELECT ON TABLES TO manager;
+
+-- Player_Info
+--- Commish
+GRANT USAGE ON SCHEMA player_info TO commish;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA player_info TO commish;
+ALTER DEFAULT PRIVILEGES IN SCHEMA player_info
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO commish;
+
+--- Manager
+GRANT USAGE ON SCHEMA player_info TO manager;
+GRANT SELECT ON ALL TABLES IN SCHEMA player_info TO manager;
+ALTER DEFAULT PRIVILEGES IN SCHEMA player_info
+    GRANT SELECT ON TABLES TO manager;
+
+-- Transactions
+--- Commish
+GRANT USAGE ON SCHEMA transactions TO commish;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA transactions TO commish;
+ALTER DEFAULT PRIVILEGES IN SCHEMA transactions
+    GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO commish;
